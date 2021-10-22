@@ -9,9 +9,44 @@ import java.util.List;
  */
 public class Oszthatosag17tel {
 
+    public String kozbulsoSzam = "";
+
     public List<String> run(List<String> bemenet) {
         List<String> kimenet = new ArrayList<>();
-
+        String bemenetSzam = bemenet.get(0);
+        if (Integer.parseInt(bemenetSzam) % 17 == 0) {
+            kimenet.add("IGEN");
+        } else {
+            kimenet.add("NEM");
+        }
+        osztas17(Integer.parseInt(bemenetSzam));
+        kimenet.add(kozbulsoSzam);
         return kimenet;
+    }
+
+    public void osztas17(int bemenetSzam) {
+        int vegeSzam = bemenetSzam%10;
+        int elejeSzam = bemenetSzam/10;
+        int ujSzam = elejeSzam - (vegeSzam * 5);
+        if(ujSzam>=0){
+
+            kozbulsoSzam += ujSzam + " ";
+        }
+        if(ujSzam<=0){
+            if(kozbulsoSzam.length()>0){
+                kozbulsoSzam=kozbulsoSzam.substring(0,kozbulsoSzam.length()-1);
+            }
+            return;
+        }
+        osztas17(ujSzam);
+
+    }
+
+    public int kivonas(int ertek) {
+        int visszaSzam = --ertek;
+        if (visszaSzam <= 0) {
+            return visszaSzam;
+        }
+        return kivonas(visszaSzam);
     }
 }
